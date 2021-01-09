@@ -33,7 +33,16 @@ namespace exploreropener
                     {
                         if (args[0] == "browse")
                         {
-                            shell.Explore(Path.GetDirectoryName(item.Path));
+                            if (item.Path[1] == ':')
+                            {
+                                String s = String.Format("/select,\"{0}\"", item.Path);
+                                
+                                shell.ShellExecute("explorer.exe", s);
+                            }
+                            else
+                            {
+                                shell.Explore(Path.GetDirectoryName(item.Path));
+                            }
                         }
                         if (args[0] == "open")
                         {
@@ -42,6 +51,7 @@ namespace exploreropener
                     }
                 }
             }
+            
         }
     }
 }
